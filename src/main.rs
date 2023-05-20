@@ -65,6 +65,27 @@
   rust_2021_compatibility
 )]
 
+use bevy::prelude::*;
+#[cfg(feature = "debug")]
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
+
+fn camera_setup(mut commands: Commands<'_, '_>) {
+  commands.spawn(Camera2dBundle::default());
+}
+
 fn main() {
-  println!("Hello, world!");
+  let mut app = App::new();
+  app
+    .add_plugins(DefaultPlugins.set(WindowPlugin {
+      primary_window: Some(Window {
+        title: "Hexs".to_string(),
+        resolution: (800., 800.).into(),
+        ..Default::default()
+      }),
+      ..Default::default()
+    }))
+    .add_startup_system(camera_setup);
+  #[cfg(feature = "debug")]
+  app.add_plugin(WorldInspectorPlugin::new());
+  app.run();
 }
