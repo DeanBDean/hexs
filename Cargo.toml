@@ -10,5 +10,11 @@ default = []
 debug = ["bevy-inspector-egui"]
 
 [dependencies]
+anyhow = "1.0"
 bevy = "0.10"
 bevy-inspector-egui = { version = "0.18", optional = true}
+bevy_prototype_lyon = "0.8"
+num-derive = "0.3"
+num-integer = "0.1"
+num-traits = "0.2"
+strum = { version = "0.24", features = ["derive"] }

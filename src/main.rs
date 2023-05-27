@@ -65,12 +65,26 @@
   rust_2021_compatibility
 )]
 
+mod grid;
+mod newtypes;
+
 use bevy::prelude::*;
+use bevy_prototype_lyon::prelude::*;
+
 #[cfg(feature = "debug")]
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
+use grid::cell::{draw_hexagon, HexagonCell};
+#[cfg(feature = "debug")]
+use grid::cell::{Column, Coordinate, HexagonFill, HexagonLines, Row};
+#[cfg(feature = "debug")]
+use newtypes::{pixel::Pixel, side_length::SideLength};
 
 fn camera_setup(mut commands: Commands<'_, '_>) {
   commands.spawn(Camera2dBundle::default());
+}
+
+fn create_initial_hexagon(mut commands: Commands<'_, '_>) {
+  commands.spawn(HexagonCell::default());
 }
 
 fn main() {
@@ -84,8 +98,20 @@ fn main() {
       }),
       ..Default::default()
     }))
-    .add_startup_system(camera_setup);
+    .add_plugin(ShapePlugin)
+    .add_startup_system(camera_setup.in_base_set(StartupSet::PreStartup))
+    .add_startup_system(create_initial_hexagon.in_base_set(StartupSet::PreStartup))
+    .add_startup_system(draw_hexagon);
   #[cfg(feature = "debug")]
-  app.add_plugin(WorldInspectorPlugin::new());
+  app
+    .add_plugin(WorldInspectorPlugin::new())
+    .register_type::<Column>()
+    .register_type::<Row>()
+    .register_type::<Coordinate>()
+    .register_type::<HexagonCell>()
+    .register_type::<HexagonFill>()
+    .register_type::<HexagonLines>()
+    .register_type::<Pixel>()
+    .register_type::<SideLength>();
   app.run();
 }
