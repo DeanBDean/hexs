@@ -10,7 +10,7 @@ use strum::{Display as StrumDisplay, EnumCount, EnumIter, IntoEnumIterator};
 
 use crate::newtypes::{pixel::Pixel, side_length::SideLength};
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(
   Clone, Component, Copy, Debug, Default, EnumCount, EnumIter, FromPrimitive, PartialEq, Eq, PartialOrd, Ord, StrumDisplay,
 )]
@@ -85,7 +85,7 @@ impl AsLetters for usize {
   }
 }
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Column(usize);
 
@@ -119,7 +119,7 @@ impl AsLetters for Column {
   }
 }
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Row(usize);
 
@@ -145,7 +145,7 @@ impl AsLetters for Row {
   }
 }
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Coordinate(Row, Column);
 
@@ -176,7 +176,7 @@ impl Default for HexagonCellConstructor {
   }
 }
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug, PartialEq)]
 pub struct HexagonCell {
   coordinate: Coordinate,
@@ -222,7 +222,7 @@ impl HexagonCell {
   }
 }
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug, EnumCount, EnumIter, PartialEq, Eq, StrumDisplay)]
 #[allow(clippy::enum_variant_names)]
 pub enum HexagonLines {
@@ -239,7 +239,7 @@ pub enum HexagonLines {
   BottomDescendingLine,
 }
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug)]
 pub struct HexagonFill;
 

@@ -98,13 +98,12 @@ fn main() {
       }),
       ..Default::default()
     }))
-    .add_plugin(ShapePlugin)
-    .add_startup_system(camera_setup.in_base_set(StartupSet::PreStartup))
-    .add_startup_system(create_initial_hexagon.in_base_set(StartupSet::PreStartup))
-    .add_startup_system(draw_hexagon);
+    .add_plugins(ShapePlugin)
+    .add_systems(PreStartup, (camera_setup, create_initial_hexagon))
+    .add_systems(Update, draw_hexagon);
   #[cfg(feature = "debug")]
   app
-    .add_plugin(WorldInspectorPlugin::new())
+    .add_plugins(WorldInspectorPlugin::new())
     .register_type::<Column>()
     .register_type::<Row>()
     .register_type::<Coordinate>()

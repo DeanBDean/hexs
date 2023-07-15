@@ -2,7 +2,7 @@ use std::ops::Deref;
 
 use bevy::prelude::*;
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Pixel(usize);
 

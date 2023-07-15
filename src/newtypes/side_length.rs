@@ -5,7 +5,7 @@ use std::{
 
 use bevy::prelude::*;
 
-#[cfg_attr(feature = "debug", derive(Reflect, FromReflect))]
+#[cfg_attr(feature = "debug", derive(Reflect))]
 #[derive(Clone, Component, Copy, Debug, PartialEq, PartialOrd)]
 pub struct SideLength(f32);
 
